@@ -1,0 +1,27 @@
+#!/bin/sh
+
+ServerRoot=@TOPDIR@
+PORT=$($ServerRoot/test/etc/portnum.sh)
+WEBSERVER=${WEBSERVER-@WEBSERVER@}
+
+if [ ! -x ${WEBSERVER} ]; then
+	if [ -x /usr/sbin/httpd2 ]; then
+		WEBSERVER=/usr/sbin/httpd2
+	else
+		echo NO web server found at $WEBSERVER
+		exit 10
+	fi
+fi
+
+mkdir -p $ServerRoot/run/lock/apache2
+
+echo Starting web server on port $PORT
+$WEBSERVER -f $ServerRoot/test/etc/apache2.conf -d $ServerRoot -C 'User '$USER -C 'Listen 127.0.0.1:'$PORT
+
+# for applications which use Rails too.
+#echo Now starting mongrel cluster on port 9000/9001.
+#echo NOTE: started in DEVELOPMENT mode.
+
+#$ServerRoot/script/process/spawner mongrel -p 9000 -i 2 -a 127.0.0.1
+
+
