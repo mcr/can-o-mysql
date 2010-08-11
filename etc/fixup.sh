@@ -5,14 +5,14 @@
 # this is based upon work in the ircan.gc.ca's ITERation project.
 #
 
-while [ ! -d htdocs ]
-then
+while [ ! -d public ]
+do
 	cd ..
-fi
+done
 
-if [ -d htdocs ]
+if [ -d public ]
 then
-    TOPDIR=$(cd ../..; pwd)
+    TOPDIR=$(pwd)
 else
     echo it seems that I can not find the top-level htdocs
     exit 2
@@ -38,7 +38,7 @@ SYSTEMURL=$(echo 'http://localhost:'${SYSTEMPORT}'/')
 localize() {
     file=$1
     echo Processing $file
-	sed -e 's,@TopDir@,'${TOPDIR}',g' \
+	sed -e 's,@TOPDIR@,'${TOPDIR}',g' \
             -e 's,@APACHE2_MODDIR@,'${APACHE2_MODDIR}',g' \
             -e 's,@WEBSERVER@,'${WEBSERVER}',g' \
             -e 's,@MIMETYPES@,'${MIMETYPES}',g' \
@@ -55,5 +55,12 @@ localize etc/apache2.conf
 localize etc/runweb.sh
 localize etc/php.ini
 localize etc/shutit.sh
-localize php/install-settings.php
+localize etc/initdb.sh
+localize etc/rundb.sh
+localize etc/shutdb.sh
+localize etc/shutit.sh
+if [ -f php/install-settings.php.in ]; then
+    localize php/install-settings.php
+fi
+
 

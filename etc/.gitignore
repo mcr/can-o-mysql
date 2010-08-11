@@ -3,3 +3,6 @@ apache2.conf
 php.ini
 runweb.sh
 shutit.sh
+initdb.sh
+rundb.sh
+shutdb.sh
