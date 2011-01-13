@@ -59,6 +59,7 @@ localize etc/initdb.sh
 localize etc/rundb.sh
 localize etc/shutdb.sh
 localize etc/shutit.sh
+localize etc/mysql.sh
 if [ -f php/install-settings.php.in ]; then
     localize php/install-settings.php
 fi
