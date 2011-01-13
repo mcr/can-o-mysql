@@ -3,6 +3,7 @@
 TOPDIR=@TOPDIR@
 RUNDIR=${TOPDIR}/run
 LOGDIR=${TOPDIR}/log
+DBDIR=${RUNDIR}/db
 PIDFILE=${RUNDIR}/mysqld.pid
 SOCKET=${RUNDIR}/mysqld.sock
 if [ -d /usr/local/mysql ]; then
@@ -16,13 +17,13 @@ mkdir -p ${TOPDIR}/db/mysql
 mkdir -p ${LOGDIR}/mysql
 PATH=${BASEDIR}/scripts:${BASEDIR}/bin:$PATH export PATH
 
-mysql_install_db --basedir=${BASEDIR} --datadir=${TOPDIR}/db/mysql --pid-file=${PIDFILE} --skip-external-locking --socket=${SOCKET} --log_bin=${LOGDIR}/mysql/mysql-bin.log
+mysql_install_db --basedir=${BASEDIR} --datadir=${DBDIR} --pid-file=${PIDFILE} --skip-external-locking --socket=${SOCKET} --log_bin=${LOGDIR}/mysql/mysql-bin.log
 
 echo ${SOCKET} >.mysql.socket
 
 # now start the DB.
 # have to start up mysql with TCP networking enabled!
-mysqld --basedir=${BASEDIR} --datadir=${TOPDIR}/db/mysql --pid-file=${PIDFILE} --skip-external-locking --socket=${SOCKET} --port=3307 --log_bin=${LOGDIR}/mysql/mysql-bin.log &
+mysqld --basedir=${BASEDIR} --datadir=${DBDIR} --pid-file=${PIDFILE} --skip-external-locking --socket=${SOCKET} --port=3307 --log_bin=${LOGDIR}/mysql/mysql-bin.log &
 sleep 10
 
 connargs="--protocol=socket --socket=${SOCKET} "
