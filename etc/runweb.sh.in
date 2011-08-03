@@ -19,7 +19,7 @@ if [ -d /usr/share/phpmyadmin ]; then
     (cd $ServerRoot/run/phpmyadmin;
         ln -f -s /usr/share/phpmyadmin/* .
         rm -f config.inc.php
-        cp $ScriptDir/php/config.inc.php conf )
+        cp $ScriptDir/config.inc.php . )
 fi
 
 mkdir -p $ServerRoot/run/lock/apache2

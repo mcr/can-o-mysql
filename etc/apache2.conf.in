@@ -122,7 +122,23 @@ LoadModule php5_module @PHP5_MODDIR@/libphp5.so
 </IfModule>
 
 
+# phpMyAdmin default Apache configuration
 
+Alias /phpmyadmin @RUNDIR@/phpmyadmin
+
+<Directory @RUNDIR@>
+	Options Indexes FollowSymLinks
+	DirectoryIndex index.php
+
+	<IfModule mod_php5.c>
+		AddType application/x-httpd-php .php
+
+		php_flag magic_quotes_gpc Off
+		php_flag track_vars On
+		php_flag register_globals Off
+		php_value include_path .
+	</IfModule>
+</Directory>
 
 
 
@@ -417,12 +433,6 @@ BrowserMatch "^WebDAVFS/1.[012]" redirect-carefully
 #    Allow from .your_domain.com
 #</Location>
 
-<Proxy balancer://spartan_cluster>
-      Order deny,allow
-      Allow from all
-      BalancerMember http://127.0.0.1:3010
-</Proxy>
-
 ServerAdmin webmaster@localhost
 ServerName  localhost
 	
@@ -437,27 +447,6 @@ DocumentRoot @TOPDIR@/public
 	Order allow,deny
 	allow from all
 </Directory>
-
-RewriteEngine On
-
-# check for maintenance file and redirect all requests
-RewriteCond %{DOCUMENT_ROOT}/system/maintenance.html -f
-RewriteCond %{SCRIPT_FILENAME} !maintenance.html
-RewriteRule ^.*$ /system/maintenance.html [L]
-
-# Rewrite index to check for static
-RewriteRule ^/$ /index.php [QSA]
-RewriteRule ^/vsp-forms/$ /vsp-forms/index.php [QSA]
-
-# Rewrite to check for Rails cache page
-RewriteRule ^([^.]+)$ $1.html [QSA]
-
-# look for error Alias.
-RewriteRule ^/error/(.+)$ - [L]
-
-# Rewrite all non-static requests to cluster
-RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_FILENAME} !-f
-RewriteRule ^/(.*)$ balancer://spartan_cluster%{REQUEST_URI} [P,QSA,L]
 
 ErrorLog run/log/apache2/error.log
 

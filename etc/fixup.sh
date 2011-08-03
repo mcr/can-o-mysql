@@ -35,6 +35,7 @@ SYSTEMURL=$(echo 'http://localhost:'${SYSTEMPORT}'/')
 SECRETSECRET=$(pwgen 16 1)
 RUNDIR=${TOPDIR}/run
 SOCKET=${RUNDIR}/mysqld.sock
+SCRIPTDIR=etc
 
 # now create all the relevant files.
 
@@ -46,6 +47,8 @@ localize() {
             -e 's,@WEBSERVER@,'${WEBSERVER}',g' \
             -e 's,@MIMETYPES@,'${MIMETYPES}',g' \
             -e 's,@SECRETSECRET@,'${SECRETSECRET}',g' \
+            -e 's,@RUNDIR@,'${RUNDIR}',g' \
+            -e 's,@SCRIPTDIR@,'${SCRIPTDIR}',g' \
             -e 's,@SOCKET@,'${SOCKET}',g' \
             -e 's,@PHP5_MODDIR@,'${PHP5_MODDIR}',g' \
             $file.in >$file
