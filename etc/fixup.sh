@@ -32,6 +32,9 @@ SYSTEMPORT=$(./etc/portnum.sh )
 IPADDRESS=127.0.0.1
 MIMETYPES=$(if [ -f /etc/apache2/mime.types ]; then echo /etc/apache2/mime.types; elif [ -f /etc/mime.types ]; then echo /etc/mime.types; fi)
 SYSTEMURL=$(echo 'http://localhost:'${SYSTEMPORT}'/')
+SECRETSECRET=$(pwgen 16 1)
+RUNDIR=${TOPDIR}/run
+SOCKET=${RUNDIR}/mysqld.sock
 
 # now create all the relevant files.
 
@@ -42,6 +45,8 @@ localize() {
             -e 's,@APACHE2_MODDIR@,'${APACHE2_MODDIR}',g' \
             -e 's,@WEBSERVER@,'${WEBSERVER}',g' \
             -e 's,@MIMETYPES@,'${MIMETYPES}',g' \
+            -e 's,@SECRETSECRET@,'${SECRETSECRET}',g' \
+            -e 's,@SOCKET@,'${SOCKET}',g' \
             -e 's,@PHP5_MODDIR@,'${PHP5_MODDIR}',g' \
             $file.in >$file
 	if [ -x $file.in ]; then chmod +x $file; fi
@@ -59,6 +64,8 @@ localize etc/initdb.sh
 localize etc/rundb.sh
 localize etc/shutdb.sh
 localize etc/shutit.sh
+localize etc/config.inc.php
+
 if [ -f php/install-settings.php.in ]; then
     localize php/install-settings.php
 fi
