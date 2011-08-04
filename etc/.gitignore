@@ -1,5 +1,7 @@
 *~
 apache2.conf
+config.inc.php
+mysql.sh
 php.ini
 runweb.sh
 shutit.sh
