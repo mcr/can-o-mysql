@@ -16,6 +16,6 @@ fi
 
 PATH=/usr/local/mysql/bin:$PATH export PATH
 connargs="--protocol=socket --socket=${SOCKET} "
-mysql $connargs -u root --password='Ahw3ooh2' redmine_development $*
+mysql $connargs -u root --password='Ahw3ooh2' $*
 
 

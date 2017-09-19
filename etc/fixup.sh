@@ -5,7 +5,7 @@
 # this is based upon work in the ircan.gc.ca's ITERation project.
 #
 
-while [ ! -d public ]
+while [ ! -d public ] && [ ! -d boot/grub ]
 do
 	cd ..
 done
@@ -17,7 +17,7 @@ else
     echo it seems that I can not find the top-level htdocs
     exit 2
 fi
-	
+
 PORT=$(./etc/portnum.sh)
 VERSION=1
 
