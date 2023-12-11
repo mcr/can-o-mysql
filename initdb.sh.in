@@ -17,7 +17,7 @@ mkdir -p ${TOPDIR}/db/mysql
 mkdir -p ${LOGDIR}/mysql
 PATH=${BASEDIR}/scripts:${BASEDIR}/bin:$PATH export PATH
 
-mysql_install_db --basedir=${BASEDIR} --datadir=${DBDIR} --pid-file=${PIDFILE} --skip-external-locking --socket=${SOCKET} --log_bin=${LOGDIR}/mysql/mysql-bin.log
+mysql_install_db --no-defaults --basedir=${BASEDIR} --datadir=${DBDIR} --pid-file=${PIDFILE} --skip-external-locking --socket=${SOCKET} --log_bin=${LOGDIR}/mysql/mysql-bin.log
 
 echo ${SOCKET} >.mysql.socket
 
@@ -28,7 +28,7 @@ sleep 10
 
 connargs="--protocol=socket --socket=${SOCKET} "
 
-( echo "update user set host='%' where host='localhost';" 
+( echo "update user set host='%' where host='localhost';"
   echo "update user set password=PASSWORD('Ahw3ooh2') where user='root';"
   echo "FLUSH PRIVILEGES;" ) | mysql -h 127.0.0.1 --port=3307 -u root mysql
 
@@ -40,6 +40,10 @@ sleep 10
 
 if [ -f etc/bootstrap.sql ]; then
     cat etc/bootstrap.sql | mysql -h 127.0.0.1 --port=3307 -u root --password='Ahw3ooh2' mysql
+fi
+
+if [ -f ./bootstrap.sql ]; then
+    cat ./bootstrap.sql | mysql -h 127.0.0.1 --port=3307 -u root --password='Ahw3ooh2' mysql
 fi
 
 sleep 10
