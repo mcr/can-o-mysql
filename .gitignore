@@ -1,3 +1,10 @@
-db
-log
-run
+        apache2.conf
+        config.inc.php
+        initdb.sh
+        initsql.sql
+        mysql.sh
+        php.ini
+        rundb.sh
+        runweb.sh
+        shutdb.sh
+        shutit.sh
