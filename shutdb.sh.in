@@ -11,5 +11,5 @@ else
 	BASEDIR=/usr
 fi
 
-mysqladmin --protocol=socket --socket=${SOCKET} -u root --password=Ahw3ooh2 shutdown
+mysqladmin --protocol=socket --socket=${SOCKET} shutdown
 

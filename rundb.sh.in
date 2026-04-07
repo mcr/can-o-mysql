@@ -16,4 +16,4 @@ else
 fi
 
 PATH=/usr/local/mysql/bin:$PATH export PATH
-mysqld --basedir=${BASEDIR} --datadir=${DBDIR} --pid-file=${PIDFILE} --skip-external-locking --socket=${SOCKET} --skip-networking --log_bin=${LOGDIR}/mysql/mysql-bin.log &
+mysqld --no-defaults --basedir=${BASEDIR} --datadir=${DBDIR} --pid-file=${PIDFILE} --skip-external-locking --socket=${SOCKET} --skip-networking --log_bin=${LOGDIR}/mysql/mysql-bin.log &
