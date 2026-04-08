@@ -1,10 +1,12 @@
-        apache2.conf
-        config.inc.php
-        initdb.sh
-        initsql.sql
-        mysql.sh
-        php.ini
-        rundb.sh
-        runweb.sh
-        shutdb.sh
-        shutit.sh
+apache2.conf
+config.inc.php
+db.datasource.config.json
+*~
+initdb.sh
+initsql.sql
+mysql.sh
+php.ini
+rundb.sh
+runweb.sh
+shutdb.sh
+shutit.sh
