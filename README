@@ -1,7 +1,9 @@
 Download
 --------
 
-[dl]: git://github.com/mcr/can-o-mysql.git 
+This code has moved to: https://codeberg.org/mcr/can-o-mysql.git
+
+[dl]: git://github.com/mcr/can-o-mysql.git
 
 
 Introduction
@@ -25,7 +27,7 @@ together.
   [fixup]: etc/fixup.sh
 
 To start with this, create a new empty project.  I suggest that you
-fork my can-o-mysql project on github, and then check it out.  
+fork my can-o-mysql project on github, and then check it out.
 
 Then setup your "public" directory to point to the root of your HTML/PHP
 code.  For existing projects there are several ways you could do this:
